@@ -110,6 +110,9 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         //1枚目を表示
         if (cursor!!.moveToFirst()) {
             showImage()
+        }else{
+            cursor!!.close()
+            cursor = null
         }
     }
 
