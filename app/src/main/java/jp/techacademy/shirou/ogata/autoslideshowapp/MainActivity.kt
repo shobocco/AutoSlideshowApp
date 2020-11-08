@@ -96,6 +96,13 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
 
+    override fun onDestroy() {
+        if(cursor != null) {
+            cursor!!.close()
+        }
+        super.onDestroy()
+    }
+
     private fun getContentsInfo() {
         // 画像の情報を取得する
         val resolver = contentResolver
@@ -122,8 +129,9 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         val id = cursor!!.getLong(fieldIndex)
         val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-
         imageView.setImageURI(imageUri)
+
+        //現在位置をてきすとで表示
         textView.text = "${cursor!!.position + 1}/${cursor!!.count}"
     }
 
